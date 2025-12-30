@@ -7,20 +7,20 @@ import Image from 'next/image';
 import Beams from '@/components/Beams';
 
 // ------------------------------------------------------------------
-// Komponen Carousel Teks Sederhana (Telah Disederhanakan)
+// Komponen Carousel Teks (Copywriting Khusus Admin Self Studio)
 // ------------------------------------------------------------------
 const TEXT_SLIDES = [
   {
-    title: "Manage Everything in One System.",
-    subtitle: "Integrate finance, operations, and human resources in a single ERP platform."
+    title: "Capture Every Moment, Manage Every Detail.",
+    subtitle: "Pantau jadwal sesi, ketersediaan room, dan transaksi harian dalam satu dashboard terintegrasi."
   },
   {
-    title: "Centralized Control. Real-Time Insights.",
-    subtitle: "Monitor performance and make informed decisions with live data across all departments."
+    title: "Real-Time Booking & Session Control.",
+    subtitle: "Kelola reservasi pelanggan dan durasi sesi secara otomatis untuk efisiensi operasional studio."
   },
   {
-    title: "Scale Your Business with Confidence.",
-    subtitle: "A flexible ERP solution designed to grow alongside your business needs."
+    title: "Seamless Asset & Print Management.",
+    subtitle: "Atur penyimpanan file digital hingga stok kertas cetak tanpa perlu repot mencatat manual."
   },
 ];
 
@@ -40,8 +40,7 @@ const TextCarousel = () => {
   return (
     <div 
       key={currentIndex} 
-      className="transition-opacity duration-1000 ease-in-out mt-12" // Tambahkan mt-12 untuk memberi ruang di bawah logo
-      style={{ opacity: 1 }} 
+      className="animate-in fade-in duration-1000 mt-12"
     >
       <h2 className="text-5xl font-extrabold leading-tight mb-4">
         {currentSlide.title}
@@ -56,42 +55,38 @@ const TextCarousel = () => {
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
-  // ... (state dan handleLogin tetap sama)
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
 
- const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setError('');
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
 
-  try {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      const userRole = data.user.role; 
-      localStorage.setItem('user_role', userRole);
-      router.push('/dashboard');
-    } else {
-      setError(data.message || 'Login gagal. Cek username dan password Anda.');
+      if (response.ok) {
+        const userRole = data.user.role; 
+        localStorage.setItem('user_role', userRole);
+        router.push('/dashboard');
+      } else {
+        setError(data.message || 'Login gagal. Cek username dan password Anda.');
+      }
+    } catch (err) {
+      console.error("Login error:", err); 
+      setError('Terjadi kesalahan jaringan atau server.');
     }
-  } catch (err) {
-    // Log error lengkap di console jika perlu
-    console.error("Login error:", err); 
-    setError('Terjadi kesalahan jaringan atau server.');
-  }
-};
-
+  };
 
   return (
-    // Kontainer Utama: full-screen
-    <div className="relative w-screen h-screen overflow-hidden">
+    <div className="relative w-screen h-screen overflow-hidden font-['Plus_Jakarta_Sans',sans-serif]">
       
       {/* Background Beams */}
       <div className="absolute inset-0 z-0">
@@ -107,134 +102,94 @@ export default function LoginPage() {
         />
       </div>
 
-      <div className="absolute text-white text-3xl font-bold tracking-widest p-18">
-                Dyaz.
-            </div>
+      {/* Brand Logo / Name */}
+      <div className="absolute text-white text-3xl font-bold tracking-widest p-12 md:p-18 z-20">
+        LINEASTUDIO
+      </div>
+
       <div className="relative z-10 flex h-full flex-col items-end justify-center p-4 md:p-12 md:flex-row md:justify-between"> 
-         
         
-        
+        {/* AREA KIRI: Carousel (Desktop Only) */}
         <div className="hidden md:flex flex-col justify-center w-full md:w-1/2 p-8 text-white relative">
-            
-              <TextCarousel />
-            
-          
+          <TextCarousel />
         </div>
         
-        {/* AREA KANAN: Card Login Utama */}
+        {/* AREA KANAN: Card Login Admin */}
         <div className="w-full max-w-sm md:max-w-lg my-auto 
                         bg-white/95 text-gray-900 
-                        shadow-2xl rounded-xl overflow-hidden md:ml-auto h-full">
+                        shadow-2xl rounded-3xl overflow-hidden md:ml-auto">
           
-          {/* Header Card (Judul dan Deskripsi) */}
-          <div className="p-6 md:p-8">
-             <div className="text-3xl font-bold">Welcome to ERP App by Dyaz</div>
-             <p className="mt-2 text-gray-700">Login to manage and integrate your business.</p>
-          </div>
-
+          <div className="p-8 md:p-12">
+             <div className="text-3xl font-['Playfair_Display',serif] font-bold">Admin Login</div>
+             <p className="mt-2 text-gray-600 font-medium">Selamat datang kembali! Masuk untuk mengelola operasional Linea Studio.</p>
           
-          <div className="px-6 pb-6 md:px-8 md:pb-8"> {/* Padding untuk body card */}
-             
              {error && (
-                <div className="p-3 text-sm font-medium text-red-700 border border-red-300 bg-red-100 rounded-lg mb-4">
+                <div className="mt-6 p-3 text-sm font-medium text-red-700 border border-red-300 bg-red-50 rounded-xl">
                   {error}
                 </div>
               )}
 
-            <form onSubmit={handleLogin} className="space-y-4">
-    
-                {/* GRUP USERNAME */}
+            <form onSubmit={handleLogin} className="space-y-5 mt-8">
                 <div className="space-y-1">
-                    <p className='font-bold text-sm text-gray-800'>Username</p>
+                    <p className='font-bold text-xs uppercase tracking-widest text-gray-500'>Administrator Username</p>
                     <input
                         type="text"
-                        placeholder="Username atau Email"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 
-                                    text-gray-900 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                        placeholder="Masukkan username"
+                        className="w-full border border-gray-200 rounded-xl px-4 py-3.5 
+                                    text-gray-900 focus:ring-2 focus:ring-zinc-900 focus:border-transparent outline-none transition-all"
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
                 </div>
 
-                {/* GRUP PASSWORD */}
                 <div className="space-y-1">
-                    <p className='font-bold text-sm text-gray-800'>Password</p>
+                    <p className='font-bold text-xs uppercase tracking-widest text-gray-500'>Security Password</p>
                     <input
                         type="password"
-                        placeholder="Password"
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 
-                                    text-gray-900 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+                        placeholder="••••••••"
+                        className="w-full border border-gray-200 rounded-xl px-4 py-3.5 
+                                    text-gray-900 focus:ring-2 focus:ring-zinc-900 focus:border-transparent outline-none transition-all"
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                 </div>
 
-                {/* CHECKBOX & FORGOT PASSWORD */}
                 <div className="flex justify-between items-center text-sm pt-2">
-                    
-                    {/* Checkbox Remember Me */}
                     <div className="flex items-center">
                         <input 
                             id="remember-me" 
                             name="remember-me" 
                             type="checkbox" 
-                            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                            className="h-4 w-4 text-zinc-900 border-gray-300 rounded focus:ring-zinc-900"
                         />
-                        <label htmlFor="remember-me" className="ml-2 text-gray-700">
-                            Remember Me
+                        <label htmlFor="remember-me" className="ml-2 text-gray-600">
+                            Tetap masuk
                         </label>
                     </div>
 
-                    {/* Forgot Password Link */}
                     <Link 
                         href="/forgot-password" 
-                        className="font-medium text-gray-600 hover:text-gray-500"
+                        className="font-medium text-gray-400 hover:text-zinc-900 transition-colors"
                     >
-                        Forgot Password?
+                        Lupa password?
                     </Link>
                 </div>
 
-                {/* BUTTON LOGIN */}
                 <button
                     type="submit"
-                    className="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold 
-                                hover:bg-gray-700 transition duration-200 shadow-md mt-6"
+                    className="w-full bg-zinc-900 text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs
+                                hover:bg-zinc-800 transition duration-300 shadow-lg mt-6 active:scale-[0.98]"
                 >
-                    Login
+                    Sign In to Dashboard
                 </button>
             </form>
 
-            {/* DIVIDER DAN LOGIN WITH GOOGLE */}
-            <div className="flex items-center my-6">
-                <div className="flex-grow border-t border-gray-300"></div>
-                <span className="flex-shrink mx-4 text-sm text-gray-500">OR</span>
-                <div className="flex-grow border-t border-gray-300"></div>
+            <div className="mt-10 pt-8 border-t border-gray-100">
+               <p className="text-xs text-center text-gray-400 font-medium italic">
+                  "Capture your true self in total privacy." <br/>
+                  <span className="mt-2 block not-italic font-bold text-gray-200 uppercase tracking-tighter">Linea Studio ERP v1.0</span>
+               </p>
             </div>
-
-            {/* BUTTON LOGIN WITH GOOGLE */}
-            <button
-                type="button"
-                className="w-full flex items-center justify-center border border-gray-300 bg-white text-gray-700 py-3 rounded-lg font-semibold 
-                            hover:bg-gray-50 transition duration-200 shadow-sm"
-                onClick={() => alert('Fungsi Login with Google belum diimplementasikan!')}
-            >
-                {/* Gunakan Image Next.js */}
-                <Image 
-                    src="/google-icon.png"
-                    alt="Google" 
-                    width={20}
-                    height={20}
-                    className="mr-3"
-                />
-                Continue with Google
-            </button>
-
-            <p className="mt-6 text-sm text-center text-gray-600">
-                Belum punya akun?{' '}
-                <Link href="/register" className="font-semibold text-gray-600 hover:text-gray-500">
-                    Daftar di sini
-                </Link>
-            </p>
           </div>
         </div>
 

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-// Hapus 'Camera' dari import karena tidak digunakan
 import { CheckCircle2, ChevronRight, ChevronLeft, Star, Quote, X, Zap, Users, Sparkles, MapPin, Clock } from 'lucide-react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import NavbarLP from '@/components/NavbarLP';
@@ -25,7 +24,7 @@ export default function LandingPage() {
   const galleryImages = [
     "/images/image8.png", "/images/image3.png", "/images/image1.png",
     "/images/image4.jpg", "/images/image6.jpg", "/images/image5.jpg",
-    "/images/image2.png", "/images/image7.png", "/images/image2.png",
+    "/images/image2.png", "/images/image7.png",
   ];
 
   const reviews = [
@@ -40,7 +39,6 @@ export default function LandingPage() {
     { title: "Custom", icon: <Sparkles size={24}/>, price: "Custom", color: "bg-white", sub: "Request Khusus", features: ["Atur waktu dan jumlah orang sesukamu."] }
   ];
 
-  // PERBAIKAN: Ganti 'Function' dengan tipe yang lebih spesifik agar tidak error saat deploy
   const nextSlide = (current: number, setter: React.Dispatch<React.SetStateAction<number>>, max: number) => 
     setter(current === max - 1 ? 0 : current + 1);
 
@@ -52,59 +50,59 @@ export default function LandingPage() {
       <NavbarLP />  
 
       {/* --- HERO SECTION --- */}
-      <section className="relative h-[85vh] md:h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-[90vh] md:h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/80 to-[#F8F9FF] z-10" />
           <Image src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop" fill priority className="object-cover opacity-20 grayscale" alt="Hero Bg" />
         </div>
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="relative z-20 text-center px-4 max-w-5xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-white border border-sky-100 mb-6 md:mb-8 shadow-sm">
-            <div className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-            <span className="text-[9px] md:text-xs font-bold tracking-[0.2em] text-sky-600 uppercase">Self Photo Ter-Worth It Bogor</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-sky-100 mb-8 shadow-sm">
+            <div className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+            <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-sky-600 uppercase">Self Photo Ter-Worth It Bogor</span>
           </div>
-          <h1 className="text-4xl sm:text-6xl md:text-[100px] font-['Playfair_Display',serif] leading-[1.1] md:leading-[0.9] text-zinc-900 tracking-tighter mb-6 md:mb-8">
+          {/* Judul Hero Diperbesar di Mobile (text-5xl) */}
+          <h1 className="text-5xl sm:text-6xl md:text-[100px] font-['Playfair_Display',serif] leading-[1.1] md:leading-[0.9] text-zinc-900 tracking-tighter mb-8 px-2">
             Pose Suka-Suka, <br /> <span className="italic font-light text-zinc-400">Hasilnya Gila.</span>
           </h1>
 
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mb-10 space-y-2">
-            <p className="text-zinc-500 text-sm md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mb-12 space-y-4">
+            <p className="text-zinc-500 text-base md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
                 Gak perlu nunggu aba-aba fotografer galak. Di sini kamu bosnya, remote di tanganmu, gaya sak karepmu. 
             </p>
-            <p className="text-sky-500 text-xs md:text-lg font-bold italic">
+            <p className="text-sky-500 text-sm md:text-lg font-bold italic">
                 100% Privasi, Gak Perlu Jaim, Di Sini Kamu Yang Main.
             </p>
           </motion.div>
 
-         <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mt-10">
-  
-  <Link 
-    href="/booking" 
-    className="w-full md:w-auto group relative inline-flex items-center justify-center gap-3 bg-zinc-900 text-white px-8 py-4 md:px-12 md:py-5 rounded-full font-bold transition-all shadow-xl hover:scale-105 active:scale-95"
-  >
-    <span className="text-[10px] md:text-sm uppercase tracking-widest">Reservasi Sekarang</span>
-    <ChevronRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1" />
-  </Link>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mt-10">
+            <Link 
+              href="/booking" 
+              className="w-full md:w-auto group relative inline-flex items-center justify-center gap-3 bg-zinc-900 text-white px-8 py-4.5 md:px-12 md:py-5 rounded-full font-bold transition-all shadow-xl hover:scale-105 active:scale-95"
+            >
+              <span className="text-xs md:text-sm uppercase tracking-widest">Reservasi Sekarang</span>
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1" />
+            </Link>
 
-  <Link 
-    href="https://wa.me/6283879631235" 
-    target="_blank"
-    className="w-full md:w-auto group relative inline-flex items-center justify-center gap-3 bg-white border border-zinc-200 text-zinc-900 px-8 py-4 md:px-12 md:py-5 rounded-full font-bold transition-all hover:bg-zinc-50 hover:scale-105 active:scale-95 shadow-sm"
-  >
-    <span className="text-[10px] md:text-sm uppercase tracking-widest">Hubungi Via Whatsapp</span>
-    <ChevronRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 text-zinc-400" />
-  </Link>
-
-</div>
+            <Link 
+              href="https://wa.me/6283879631235" 
+              target="_blank"
+              className="w-full md:w-auto group relative inline-flex items-center justify-center gap-3 bg-white border border-zinc-200 text-zinc-900 px-8 py-4.5 md:px-12 md:py-5 rounded-full font-bold transition-all hover:bg-zinc-50 hover:scale-105 active:scale-95 shadow-sm"
+            >
+              <span className="text-xs md:text-sm uppercase tracking-widest">Hubungi Via Whatsapp</span>
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 text-zinc-400" />
+            </Link>
+          </div>
         </motion.div>
       </section>
 
       {/* --- GALLERY SECTION --- */}
       <motion.section variants={fadeInUp} initial="initial" whileInView="whileInView" viewport={{ once: true }} id="gallery" className="py-16 md:py-24 border-t border-zinc-100">
         <div className="max-w-7xl mx-auto px-6 md:px-20">
-          <div className="text-center md:text-left mb-10 md:mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <h2 className="text-4xl md:text-6xl font-['Playfair_Display',serif] mb-2 text-zinc-900 tracking-tight lowercase first-letter:uppercase">Galeri</h2>
-            <div className="w-16 md:w-24 h-1.5 bg-sky-200 mb-4 rounded-full md:mx-0 mx-auto" />
+            <div className="w-16 md:w-24 h-1.5 bg-sky-200 mb-4 rounded-full mx-auto" />
           </div>
+          {/* Gallery grid tetap */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[150px] md:auto-rows-[250px]">
             {galleryImages.map((url, i) => (
               <motion.div key={i} whileHover={{ scale: 1.02 }} onClick={() => setSelectedImg(url)} className={`relative rounded-xl md:rounded-3xl overflow-hidden border border-zinc-100 shadow-sm cursor-zoom-in group ${i % 5 === 0 ? 'md:row-span-2 md:col-span-2' : ''}`}>
@@ -115,140 +113,80 @@ export default function LandingPage() {
         </div>
       </motion.section>
 
-     {/* --- PRICELIST SECTION --- */}
-<motion.section 
-  variants={fadeInUp} 
-  initial="initial" 
-  whileInView="whileInView" 
-  viewport={{ once: true }} 
-  id="pricelist" 
-  className="py-20 md:py-32 bg-white"
->
-  <div className="max-w-7xl mx-auto px-6 md:px-20">
-    <div className="mb-16 md:mb-24">
-      <h2 className="text-4xl md:text-6xl font-['Playfair_Display',serif] mb-4 text-zinc-900 tracking-tight lowercase first-letter:uppercase">
-        Pricelist
-      </h2>
-      <div className="w-16 md:w-24 h-1.5 bg-sky-200 mb-4 rounded-full " />
-    </div>
+      {/* --- PRICELIST SECTION --- */}
+      <motion.section variants={fadeInUp} initial="initial" whileInView="whileInView" viewport={{ once: true }} id="pricelist" className="py-20 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-20">
+          <div className="text-center mb-16 md:mb-24">
+            <h2 className="text-4xl md:text-6xl font-['Playfair_Display',serif] mb-4 text-zinc-900 tracking-tight lowercase first-letter:uppercase">Pricelist</h2>
+            <div className="w-16 md:w-24 h-1.5 bg-sky-200 mb-4 rounded-full mx-auto" />
+          </div>
 
-    <div className="relative">
-      {/* Desktop Grid */}
-      <div className="hidden md:grid md:grid-cols-3 gap-6 items-center">
-        {pricelist.map((p, i) => {
-          const isMiddle = i === 1; 
-          const isDark = p.color.includes('zinc-900') || p.color.includes('black');
+          <div className="relative">
+            {/* Desktop Grid */}
+            <div className="hidden md:grid md:grid-cols-3 gap-6 items-center">
+              {pricelist.map((p, i) => {
+                const isMiddle = i === 1; 
+                const isDark = p.color.includes('zinc-900') || p.color.includes('black');
+                return (
+                  <motion.div key={i} whileHover={{ y: -15 }} className={`relative ${p.color} p-10 rounded-[3.5rem] border flex flex-col justify-between transition-all duration-500 ${isMiddle ? 'scale-110 z-20 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.25)] border-transparent py-16' : 'scale-100 z-10 shadow-xl border-zinc-100 opacity-95'}`}>
+                    {isMiddle && <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-sky-400 text-white px-6 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase shadow-lg shadow-sky-200">Most Popular</div>}
+                    <div className="space-y-8">
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-inner ${isDark ? 'bg-white/10 text-sky-300' : 'bg-sky-50 text-sky-500'}`}>{p.icon}</div>
+                      <div>
+                        <h3 className={`text-4xl font-bold font-['Playfair_Display',serif] italic mb-2 ${isDark ? 'text-white' : 'text-zinc-900'}`}>{p.title}</h3>
+                        <div className={`h-1.5 w-12 rounded-full ${isDark ? 'bg-sky-400' : 'bg-sky-200'}`} />
+                      </div>
+                      <ul className={`space-y-4 text-lg font-medium ${isDark ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                        {p.features.map(f => <li key={f} className="flex items-start gap-3"><CheckCircle2 size={20} className={isDark ? 'text-sky-400' : 'text-sky-500'}/><span className="leading-tight">{f}</span></li>)}
+                      </ul>
+                    </div>
+                    <div className={`mt-12 pt-8 border-t ${isDark ? 'border-white/10' : 'border-zinc-100'} text-center`}>
+                      <div className="mb-10"><p className={`text-5xl font-bold font-['Playfair_Display',serif] ${isDark ? 'text-white' : 'text-zinc-900'}`}><span className="text-lg font-sans font-medium mr-1 opacity-50 italic">Rp</span>{p.price}</p></div>
+                      <Link href="/booking" className={`block w-full py-6 rounded-2xl text-xs font-black uppercase tracking-[0.25em] transition-all active:scale-95 ${isDark ? 'bg-white text-zinc-900 hover:bg-sky-400 hover:text-white' : 'bg-zinc-900 text-white hover:bg-sky-500'}`}>Pilih Paket</Link>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
 
-          return (
-            <motion.div
-              key={i}
-              whileHover={{ y: -15 }}
-              className={`relative ${p.color} p-10 rounded-[3.5rem] border flex flex-col justify-between transition-all duration-500
-                ${isMiddle 
-                  ? 'scale-110 z-20 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.25)] border-transparent py-16' 
-                  : 'scale-100 z-10 shadow-xl border-zinc-100 opacity-95'
-                }`}
-            >
-              {isMiddle && (
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-sky-400 text-white px-6 py-2 rounded-full text-[10px] font-black tracking-[0.2em] uppercase shadow-lg shadow-sky-200">
-                  Most Popular
-                </div>
-              )}
-
-              <div className="space-y-8">
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-inner 
-                  ${isDark ? 'bg-white/10 text-sky-300' : 'bg-sky-50 text-sky-500'}`}>
-                  {p.icon}
-                </div>
-                
-                <div>
-                  <h3 className={`text-4xl font-bold font-['Playfair_Display',serif] italic mb-2 
-                    ${isDark ? 'text-white' : 'text-zinc-900'}`}>
-                    {p.title}
-                  </h3>
-                  <div className={`h-1.5 w-12 rounded-full ${isDark ? 'bg-sky-400' : 'bg-sky-200'}`} />
-                </div>
-
-                <ul className={`space-y-4 text-lg font-medium ${isDark ? 'text-zinc-300' : 'text-zinc-600'}`}>
-                  {p.features.map(f => (
-                    <li key={f} className="flex items-start gap-3">
-                      <CheckCircle2 size={20} className={isDark ? 'text-sky-400' : 'text-sky-500'}/> 
-                      <span className="leading-tight">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className={`mt-12 pt-8 border-t ${isDark ? 'border-white/10' : 'border-zinc-100'} text-center`}>
-                <div className="mb-10">
-                  <p className={`text-5xl font-bold font-['Playfair_Display',serif] ${isDark ? 'text-white' : 'text-zinc-900'}`}>
-                    <span className="text-lg font-sans font-medium mr-1 opacity-50 italic">Rp</span>
-                    {p.price}
-                  </p>
-                </div>
-                
-                <Link 
-                  href="/booking" 
-                  className={`block w-full py-6 rounded-2xl text-xs font-black uppercase tracking-[0.25em] transition-all active:scale-95
-                    ${isDark 
-                      ? 'bg-white text-zinc-900 hover:bg-sky-400 hover:text-white' 
-                      : 'bg-zinc-900 text-white hover:bg-sky-500'
-                    }`}
-                >
-                  Pilih Paket
-                </Link>
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* Mobile View */}
-      <div className="md:hidden flex items-center relative">
-        <button onClick={() => prevSlide(priceIdx, setPriceIdx, pricelist.length)} className="absolute -left-4 z-40 p-3 rounded-full bg-white shadow-xl text-zinc-400 active:scale-75 transition-transform"><ChevronLeft size={24}/></button>
-        
-        <AnimatePresence mode="wait">
-          {(() => {
-            const current = pricelist[priceIdx];
-            const isDark = current.color.includes('zinc-900') || current.color.includes('black');
-            return (
-              <motion.div 
-                key={priceIdx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                className={`${current.color} w-full p-10 rounded-[3rem] border border-zinc-100 shadow-2xl flex flex-col min-h-[500px]`}
-              >
-                <div className="flex-1 space-y-6">
-                   <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${isDark ? 'bg-white/10 text-sky-300' : 'bg-sky-50 text-sky-500'}`}>{current.icon}</div>
-                   <h3 className={`text-3xl font-bold font-['Playfair_Display',serif] italic ${isDark ? 'text-white' : 'text-zinc-900'}`}>{current.title}</h3>
-                   <ul className={`space-y-4 ${isDark ? 'text-zinc-300' : 'text-zinc-500'}`}>
-                      {current.features.map(f => <li key={f} className="flex items-center gap-3"><CheckCircle2 size={18} className="text-sky-400"/> {f}</li>)}
-                   </ul>
-                </div>
-                <div className={`mt-8 pt-6 border-t ${isDark ? 'border-white/10' : 'border-zinc-100'} text-center`}>
-                   <p className={`text-4xl font-bold font-['Playfair_Display',serif] mb-8 ${isDark ? 'text-white' : 'text-zinc-900'}`}>Rp {current.price}</p>
-                   <Link href="/booking" className={`block w-full py-5 rounded-2xl font-black uppercase tracking-widest text-xs ${isDark ? 'bg-white text-zinc-900' : 'bg-zinc-900 text-white'}`}>Pilih Paket</Link>
-                </div>
-              </motion.div>
-            );
-          })()}
-        </AnimatePresence>
-
-        <button onClick={() => nextSlide(priceIdx, setPriceIdx, pricelist.length)} className="absolute -right-4 z-40 p-3 rounded-full bg-white shadow-xl text-zinc-400 active:scale-75 transition-transform"><ChevronRight size={24}/></button>
-      </div>
-    </div>
-  </div>
-</motion.section>
+            {/* Mobile View */}
+            <div className="md:hidden flex items-center relative">
+              <button onClick={() => prevSlide(priceIdx, setPriceIdx, pricelist.length)} className="absolute -left-4 z-40 p-3 rounded-full bg-white shadow-xl text-zinc-400 active:scale-75 transition-transform"><ChevronLeft size={24}/></button>
+              <AnimatePresence mode="wait">
+                {(() => {
+                  const current = pricelist[priceIdx];
+                  const isDark = current.color.includes('zinc-900') || current.color.includes('black');
+                  return (
+                    <motion.div key={priceIdx} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} className={`${current.color} w-full p-10 rounded-[3rem] border border-zinc-100 shadow-2xl flex flex-col min-h-[500px]`}>
+                      <div className="flex-1 space-y-6">
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${isDark ? 'bg-white/10 text-sky-300' : 'bg-sky-50 text-sky-500'}`}>{current.icon}</div>
+                        <h3 className={`text-3xl font-bold font-['Playfair_Display',serif] italic ${isDark ? 'text-white' : 'text-zinc-900'}`}>{current.title}</h3>
+                        <ul className={`space-y-4 ${isDark ? 'text-zinc-300' : 'text-zinc-500'}`}>
+                          {current.features.map(f => <li key={f} className="flex items-center gap-3"><CheckCircle2 size={18} className="text-sky-400"/> {f}</li>)}
+                        </ul>
+                      </div>
+                      <div className={`mt-8 pt-6 border-t ${isDark ? 'border-white/10' : 'border-zinc-100'} text-center`}>
+                        <p className={`text-4xl font-bold font-['Playfair_Display',serif] mb-8 ${isDark ? 'text-white' : 'text-zinc-900'}`}>Rp {current.price}</p>
+                        <Link href="/booking" className={`block w-full py-5 rounded-2xl font-black uppercase tracking-widest text-xs ${isDark ? 'bg-white text-zinc-900' : 'bg-zinc-900 text-white'}`}>Pilih Paket</Link>
+                      </div>
+                    </motion.div>
+                  );
+                })()}
+              </AnimatePresence>
+              <button onClick={() => nextSlide(priceIdx, setPriceIdx, pricelist.length)} className="absolute -right-4 z-40 p-3 rounded-full bg-white shadow-xl text-zinc-400 active:scale-75 transition-transform"><ChevronRight size={24}/></button>
+            </div>
+          </div>
+        </div>
+      </motion.section>
 
       {/* --- REVIEWS SECTION --- */}
       <motion.section variants={fadeInUp} initial="initial" whileInView="whileInView" viewport={{ once: true }} id="reviews" className="py-16 md:py-24 bg-[#F8F9FF]">
         <div className="max-w-7xl mx-auto px-6 md:px-20 text-center">
-          <div className="text-center md:text-left mb-10 md:mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <h2 className="text-4xl md:text-6xl font-['Playfair_Display',serif] mb-2 tracking-tight text-zinc-900 lowercase first-letter:uppercase">Apa menurut mereka</h2>
-            <div className="w-16 md:w-24 h-1.5 bg-sky-200 mb-4 rounded-full md:mx-0 mx-auto" />
+            <div className="w-16 md:w-24 h-1.5 bg-sky-200 mb-4 rounded-full mx-auto" />
           </div>
-          
+          {/* Review Grid & Mobile Carousel tetap */}
           <div className="hidden md:grid md:grid-cols-3 gap-10">
             {reviews.map((rev) => (
               <div key={rev.id} className="p-10 rounded-[2.5rem] bg-white shadow-xl border border-zinc-100 flex flex-col text-left">
@@ -264,15 +202,8 @@ export default function LandingPage() {
 
           <div className="md:hidden flex items-center relative px-2">
             <button onClick={() => prevSlide(reviewIdx, setReviewIdx, reviews.length)} className="absolute left-0 z-30 p-2 rounded-full bg-white shadow-lg border border-zinc-100 text-zinc-400"><ChevronLeft size={20}/></button>
-            
             <AnimatePresence mode="wait">
-              <motion.div 
-                key={reviewIdx}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="w-full p-8 rounded-[2rem] bg-white shadow-2xl border border-zinc-100 flex flex-col text-left min-h-[320px]"
-              >
+              <motion.div key={reviewIdx} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="w-full p-8 rounded-[2rem] bg-white shadow-2xl border border-zinc-100 flex flex-col text-left min-h-[320px]">
                 <Quote className="w-8 h-8 text-sky-100 mb-4" />
                 <p className="text-zinc-700 leading-relaxed mb-6 italic text-base font-light flex-1">"{reviews[reviewIdx].text}"</p>
                 <div className="flex items-center justify-between pt-4 border-t border-zinc-50 font-bold text-xs tracking-widest uppercase">
@@ -281,7 +212,6 @@ export default function LandingPage() {
                 </div>
               </motion.div>
             </AnimatePresence>
-
             <button onClick={() => nextSlide(reviewIdx, setReviewIdx, reviews.length)} className="absolute right-0 z-30 p-2 rounded-full bg-white shadow-lg border border-zinc-100 text-zinc-400"><ChevronRight size={20}/></button>
           </div>
         </div>
@@ -290,19 +220,19 @@ export default function LandingPage() {
       {/* --- LOCATION SECTION --- */}
       <motion.section variants={fadeInUp} initial="initial" whileInView="whileInView" viewport={{ once: true }} id="location" className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-20">
-          <div className="text-center md:text-left mb-10 md:mb-16">
+          <div className="text-center mb-10 md:mb-16">
             <h2 className="text-4xl md:text-6xl font-['Playfair_Display',serif] mb-2 tracking-tight text-zinc-900 lowercase first-letter:uppercase">Lokasi Kami</h2>
-            <div className="w-16 md:w-24 h-1.5 bg-sky-200 mb-4 rounded-full md:mx-0 mx-auto" />
+            <div className="w-16 md:w-24 h-1.5 bg-sky-200 mb-4 rounded-full mx-auto" />
           </div>
 
           <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="w-full md:w-1/3 space-y-8 text-center md:text-left">
+            <div className="w-full md:w-1/3 space-y-8 text-center">
               <div className="space-y-4">
-                <div className="flex items-start gap-4 justify-center md:justify-start">
+                <div className="flex items-start gap-4 justify-center">
                   <MapPin className="text-sky-400 mt-1 shrink-0" />
                   <p className="text-base md:text-xl font-medium text-zinc-600">Kp. Bitung Sari Ds. Bitung Ratna RT 004/002 <br /> Kec. Ciawi Kab. Bogor</p>
                 </div>
-                <div className="flex items-center gap-4 justify-center md:justify-start">
+                <div className="flex items-center gap-4 justify-center">
                   <Clock className="text-sky-400 shrink-0" />
                   <p className="text-sky-500 font-bold tracking-widest uppercase text-sm md:text-lg">09.00 - 21.00 WIB</p>
                 </div>
