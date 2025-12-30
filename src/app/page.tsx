@@ -1,10 +1,10 @@
 'use client';
 import React, { useState } from 'react';
-import {  CheckCircle2, ChevronRight,  Star, Quote, X, Zap, Users, Sparkles } from 'lucide-react';
+import { CheckCircle2, ChevronRight, Star, Quote, X, Zap, Users, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import NavbarLP from '@/components/NavbarLP';
 import Link from 'next/link';
-import Image from 'next/image'
+import Image from 'next/image';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -36,8 +36,13 @@ export default function LandingPage() {
       <section className="relative h-[85vh] md:h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/80 to-[#F8F9FF] z-10" />
-          <Image src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop" 
-               className="w-full h-full object-cover opacity-20 grayscale" alt="Bg" />
+          <Image 
+            src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop" 
+            fill
+            priority
+            className="object-cover opacity-20 grayscale" 
+            alt="Background Hero" 
+          />
         </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="relative z-20 text-center px-4 max-w-5xl">
@@ -59,7 +64,7 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
-      {/* --- GALLERY SECTION (MASONRY STYLE - FULL PHOTO) --- */}
+      {/* --- GALLERY SECTION --- */}
       <motion.section {...fadeInUp} id="gallery" className="py-12 md:py-20 border-t border-zinc-100">
         <div className="max-w-7xl mx-auto px-6 md:px-20">
           <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-2 text-center md:text-left">
@@ -67,7 +72,6 @@ export default function LandingPage() {
             <p className="text-zinc-400 italic font-medium text-[10px] md:text-sm tracking-[0.2em] uppercase">Klik untuk lihat foto utuh</p>
           </div>
 
-          {/* Menggunakan columns CSS agar foto tidak terpotong (Full Image) */}
           <div className="columns-2 md:columns-3 gap-4 space-y-4">
             {galleryImages.map((url, i) => (
               <motion.div 
@@ -78,8 +82,10 @@ export default function LandingPage() {
               >
                 <Image
                   src={url} 
-                  alt="Gallery" 
-                  className="w-full h-auto object-contain block" // object-contain & h-auto agar foto terlihat full
+                  alt={`Gallery Image ${i + 1}`}
+                  width={500}
+                  height={700}
+                  className="w-full h-auto object-contain block"
                 />
               </motion.div>
             ))}
@@ -87,7 +93,7 @@ export default function LandingPage() {
         </div>
       </motion.section>
 
-      {/* --- PRICELIST SECTION (SMALLER CARDS) --- */}
+      {/* --- PRICELIST SECTION --- */}
       <motion.section {...fadeInUp} id="pricelist" className="py-12 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 md:px-20">
           <div className="text-center md:text-left mb-10 md:mb-16">
@@ -95,7 +101,6 @@ export default function LandingPage() {
             <div className="w-12 h-1 bg-sky-200 mb-4 rounded-full md:mx-0 mx-auto" />
           </div>
 
-          {/* Grid dikecilkan gap-nya dan padding card dikurangi agar lebih compact */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
             {[
               { title: "Basic", icon: <Zap size={18}/>, price: "150k", color: "bg-white", text: "text-zinc-900", sub: "1-2 Orang", features: ["15 Mins Session", "All Digital Files", "1 Printed Photo"] },
@@ -131,7 +136,7 @@ export default function LandingPage() {
                 {reviews.map((rev) => (
                     <div key={rev.id} className="p-8 rounded-[2rem] bg-white shadow-sm border border-zinc-100 flex flex-col text-left">
                         <Quote className="w-6 h-6 text-sky-100 mb-4" />
-                        <p className="text-zinc-700 leading-relaxed mb-6 italic text-sm">"{rev.text}"</p>
+                        <p className="text-zinc-700 leading-relaxed mb-6 italic text-sm">&quot;{rev.text}&quot;</p>
                         <div className="flex items-center justify-between pt-4 border-t border-zinc-50 font-bold text-[10px] tracking-widest uppercase">
                             <span>{rev.name}</span>
                             <div className="flex gap-0.5">{[...Array(rev.rate)].map((_, i) => <Star key={i} size={10} className="fill-sky-400 text-sky-400" />)}</div>
@@ -152,8 +157,12 @@ export default function LandingPage() {
                 <p className="text-sky-500 font-bold">09.00 - 21.00 WIB</p>
               </div>
             </div>
-            <div className="w-full md:w-1/2 aspect-video bg-zinc-100 rounded-[2rem] overflow-hidden border-[6px] border-zinc-50 shadow-xl">
-                <iframe src="https://www.google.com/maps/embed?..." className="w-full h-full grayscale" loading="lazy"></iframe>
+            <div className="w-full md:w-1/2 aspect-video bg-zinc-100 rounded-[2rem] overflow-hidden border-[6px] border-zinc-50 shadow-xl relative">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126829.12345678!2d106.8!3d-6.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMzYnMzIuNCJTIDEwNsKwNDgnMzYuMCJF!5e0!3m2!1sid!2sid!4v1234567890" 
+                  className="absolute inset-0 w-full h-full border-0 grayscale" 
+                  loading="lazy"
+                ></iframe>
             </div>
         </div>
       </motion.section>
@@ -170,7 +179,14 @@ export default function LandingPage() {
       {selectedImg && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-10" onClick={() => setSelectedImg(null)}>
           <button className="absolute top-6 right-6 text-white"><X size={32}/></button>
-          <Image src={selectedImg} className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" alt="Preview" />
+          <div className="relative w-full h-full">
+            <Image 
+              src={selectedImg} 
+              fill
+              className="object-contain rounded-lg shadow-2xl" 
+              alt="Preview Fullscreen" 
+            />
+          </div>
         </div>
       )}
     </div>
