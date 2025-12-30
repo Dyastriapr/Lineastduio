@@ -5,8 +5,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter} from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
-import { LayoutGrid, Home, ChevronDown, Filter, Settings, LogOut } from 'lucide-react'; 
+import { LayoutGrid, Home, ChevronDown, LogOut } from 'lucide-react'; 
 
 // Import komponen Sidebar spesifik
 import SidebarAdmin from './SidebarAdmin'; 

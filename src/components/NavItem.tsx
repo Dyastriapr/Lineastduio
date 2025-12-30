@@ -1,25 +1,38 @@
-// /app/components/NavItem.tsx (Diasumsikan Anda memindahkan NavItem ke file ini)
-
 'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, LucideIcon } from 'lucide-react';
 
-export const NavItem = ({ item }: { item: any }) => {
+// 1. Definisikan Interface untuk Tipe Data
+interface SubmenuItem {
+  name: string;
+  href: string;
+}
+
+interface NavItemData {
+  name: string;
+  href: string;
+  icon?: LucideIcon; // Tipe khusus untuk icon dari Lucide
+  submenu?: SubmenuItem[];
+  isExpanded?: boolean;
+}
+
+// 2. Gunakan Interface pada Props
+export const NavItem = ({ item }: { item: NavItemData }) => {
   const Icon = item.icon;
   const pathname = usePathname();
-  // Gunakan useState untuk mengontrol ekspansi jika item memiliki submenu
+  
+  // State ekspansi
   const [isExpanded, setIsExpanded] = useState(
     item.submenu ? item.isExpanded || false : false 
   ); 
 
-  // Tentukan apakah item saat ini aktif (jika path cocok)
+  // Cek apakah aktif (termasuk cek submenu)
   const isActive = pathname.startsWith(item.href) || 
-                   (item.submenu && item.submenu.some((sub: any) => pathname.startsWith(sub.href)));
+                   (item.submenu && item.submenu.some((sub) => pathname.startsWith(sub.href)));
   
-  // Tentukan apakah item adalah header submenu (tidak memiliki href)
   const isExpandable = !!item.submenu;
 
   const handleToggle = () => {
@@ -56,17 +69,17 @@ export const NavItem = ({ item }: { item: any }) => {
 
   return (
     <div>
-      {/* 1. Render Item Utama (Header) */}
+      {/* Render Item Utama */}
       {isExpandable ? (
-        NavContent // Jika expandable, render sebagai div yang mengelola toggle
+        NavContent 
       ) : (
-        <Link href={item.href} className="block">{NavContent}</Link> // Jika tidak, render sebagai Link
+        <Link href={item.href} className="block">{NavContent}</Link>
       )}
 
-      {/* 2. Render Submenu (Jika ada dan diperluas) */}
-      {isExpandable && isExpanded && (
+      {/* Render Submenu */}
+      {isExpandable && isExpanded && item.submenu && (
         <nav className="flex flex-col space-y-1 ml-6 mt-1 mb-2 border-l border-gray-200 pl-3">
-          {item.submenu.map((subItem: any) => {
+          {item.submenu.map((subItem) => {
             const isSubActive = pathname.startsWith(subItem.href);
             return (
               <Link 

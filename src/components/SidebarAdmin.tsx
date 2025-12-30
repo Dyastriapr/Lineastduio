@@ -5,7 +5,7 @@
 import { NavItem } from './NavItem'; // Asumsi NavItem sudah diimpor dari file terpisah
 import { 
   Users, CreditCard, Box, Briefcase, BarChartBig, 
-  Code, Eye, Settings, Clock, ChevronDown, ChevronUp, Filter, User
+  Code, Eye, Settings, Clock,
 } from 'lucide-react'; 
 
 // Data Menu (Ini adalah data yang sama dengan yang ada di kode Anda, disalin ke sini)

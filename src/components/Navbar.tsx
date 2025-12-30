@@ -1,6 +1,7 @@
 // /app/components/Header.tsx (Revisi Ukuran Navbar)
 
 import { Search, Volume2, Bell, MessageSquare } from 'lucide-react'; 
+import Image from 'next/image'
 
 export default function Header() {
   return (
@@ -45,7 +46,7 @@ export default function Header() {
           
           {/* Ikon Profil (Diperbesar) */}
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-purple-500 cursor-pointer">
-              <img 
+              <Image
                   src="/path-to-your-profile-image.jpg" 
                   alt="User Profile" 
                   className="object-cover w-full h-full"
