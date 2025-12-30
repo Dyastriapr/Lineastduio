@@ -74,10 +74,27 @@ export default function LandingPage() {
                 100% Privasi, Gak Perlu Jaim, Di Sini Kamu Yang Main.
             </p>
           </motion.div>
-          <Link href="/booking" className="group relative inline-flex items-center gap-3 bg-zinc-900 text-white px-8 py-3.5 md:px-12 md:py-5 rounded-full font-bold transition-all shadow-xl hover:scale-105 active:scale-95">
-            <span className="text-[10px] md:text-sm uppercase tracking-widest">Reservasi Sekarang</span>
-            <ChevronRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1" />
-          </Link>
+
+         <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mt-10">
+  
+  <Link 
+    href="/booking" 
+    className="w-full md:w-auto group relative inline-flex items-center justify-center gap-3 bg-zinc-900 text-white px-8 py-4 md:px-12 md:py-5 rounded-full font-bold transition-all shadow-xl hover:scale-105 active:scale-95"
+  >
+    <span className="text-[10px] md:text-sm uppercase tracking-widest">Reservasi Sekarang</span>
+    <ChevronRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1" />
+  </Link>
+
+  <Link 
+    href="https://wa.me/6283879631235" 
+    target="_blank"
+    className="w-full md:w-auto group relative inline-flex items-center justify-center gap-3 bg-white border border-zinc-200 text-zinc-900 px-8 py-4 md:px-12 md:py-5 rounded-full font-bold transition-all hover:bg-zinc-50 hover:scale-105 active:scale-95 shadow-sm"
+  >
+    <span className="text-[10px] md:text-sm uppercase tracking-widest">Hubungi Via Whatsapp</span>
+    <ChevronRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 text-zinc-400" />
+  </Link>
+
+</div>
         </motion.div>
       </section>
 
