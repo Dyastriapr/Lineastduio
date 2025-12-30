@@ -1,9 +1,10 @@
 'use client';
 import React, { useState } from 'react';
-import { MapPin, Clock, CheckCircle2, ChevronRight, Camera, Star, Quote, X, Zap, Users, Sparkles } from 'lucide-react';
+import {  CheckCircle2, ChevronRight,  Star, Quote, X, Zap, Users, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import NavbarLP from '@/components/NavbarLP';
 import Link from 'next/link';
+import Image from 'next/image'
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -35,7 +36,7 @@ export default function LandingPage() {
       <section className="relative h-[85vh] md:h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/80 to-[#F8F9FF] z-10" />
-          <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop" 
+          <Image src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2070&auto=format&fit=crop" 
                className="w-full h-full object-cover opacity-20 grayscale" alt="Bg" />
         </div>
 
@@ -75,7 +76,7 @@ export default function LandingPage() {
                 onClick={() => setSelectedImg(url)} 
                 className="break-inside-avoid rounded-xl md:rounded-3xl overflow-hidden border border-zinc-100 shadow-sm cursor-zoom-in"
               >
-                <img 
+                <Image
                   src={url} 
                   alt="Gallery" 
                   className="w-full h-auto object-contain block" // object-contain & h-auto agar foto terlihat full
@@ -169,7 +170,7 @@ export default function LandingPage() {
       {selectedImg && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-10" onClick={() => setSelectedImg(null)}>
           <button className="absolute top-6 right-6 text-white"><X size={32}/></button>
-          <img src={selectedImg} className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" alt="Preview" />
+          <Image src={selectedImg} className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" alt="Preview" />
         </div>
       )}
     </div>
