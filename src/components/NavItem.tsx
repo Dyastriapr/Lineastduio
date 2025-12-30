@@ -1,0 +1,88 @@
+// /app/components/NavItem.tsx (Diasumsikan Anda memindahkan NavItem ke file ini)
+
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { ChevronDown, ChevronUp } from 'lucide-react';
+
+export const NavItem = ({ item }: { item: any }) => {
+  const Icon = item.icon;
+  const pathname = usePathname();
+  // Gunakan useState untuk mengontrol ekspansi jika item memiliki submenu
+  const [isExpanded, setIsExpanded] = useState(
+    item.submenu ? item.isExpanded || false : false 
+  ); 
+
+  // Tentukan apakah item saat ini aktif (jika path cocok)
+  const isActive = pathname.startsWith(item.href) || 
+                   (item.submenu && item.submenu.some((sub: any) => pathname.startsWith(sub.href)));
+  
+  // Tentukan apakah item adalah header submenu (tidak memiliki href)
+  const isExpandable = !!item.submenu;
+
+  const handleToggle = () => {
+    if (isExpandable) {
+      setIsExpanded(!isExpanded);
+    }
+  };
+
+  const NavContent = (
+    <div 
+        className={`
+          flex items-center space-x-3 py-3 px-3 rounded-xl transition duration-150 
+          text-md font-medium cursor-pointer ${isExpandable ? 'justify-between' : ''}
+          ${isActive 
+            ? 'bg-blue-100 text-blue-800' 
+            : 'text-gray-700 hover:bg-gray-100'
+          }
+        `}
+        onClick={handleToggle}
+    >
+      {Icon && <Icon className="w-6 h-6" />}
+      <span>{item.name}</span>
+      {isExpandable && (
+        <span className='ml-auto'>
+          {isExpanded ? (
+            <ChevronUp className="w-4 h-4 text-gray-500" />
+          ) : (
+            <ChevronDown className="w-4 h-4 text-gray-500" />
+          )}
+        </span>
+      )}
+    </div>
+  );
+
+  return (
+    <div>
+      {/* 1. Render Item Utama (Header) */}
+      {isExpandable ? (
+        NavContent // Jika expandable, render sebagai div yang mengelola toggle
+      ) : (
+        <Link href={item.href} className="block">{NavContent}</Link> // Jika tidak, render sebagai Link
+      )}
+
+      {/* 2. Render Submenu (Jika ada dan diperluas) */}
+      {isExpandable && isExpanded && (
+        <nav className="flex flex-col space-y-1 ml-6 mt-1 mb-2 border-l border-gray-200 pl-3">
+          {item.submenu.map((subItem: any) => {
+            const isSubActive = pathname.startsWith(subItem.href);
+            return (
+              <Link 
+                key={subItem.name}
+                href={subItem.href}
+                className={`
+                  text-sm py-2 px-2 rounded-lg transition duration-150
+                  ${isSubActive ? 'text-blue-700 font-semibold bg-blue-50' : 'text-gray-600 hover:text-blue-700 hover:bg-gray-100'}
+                `}
+              >
+                {subItem.name}
+              </Link>
+            );
+          })}
+        </nav>
+      )}
+    </div>
+  );
+};
